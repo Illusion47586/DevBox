@@ -16,6 +16,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
   && apt-get install -y --no-install-recommends nodejs \
   && npm install -g @openai/codex @anthropic-ai/claude-code opencode-ai \
   && rm -rf /var/lib/apt/lists/*
+COPY skills /opt/devbox/skills
+RUN mkdir -p /root/.codex/skills /root/.agents/skills /root/.claude/skills \
+  && cp -R /opt/devbox/skills/. /root/.codex/skills/ \
+  && cp -R /opt/devbox/skills/. /root/.agents/skills/ \
+  && cp -R /opt/devbox/skills/. /root/.claude/skills/
 COPY --from=build /out/devbox /usr/local/bin/devbox
 ENV DEVBOX_STATE_PATH=/var/lib/devbox/state.json \
     DEVBOX_WORKSPACE_ROOT=/workspaces \

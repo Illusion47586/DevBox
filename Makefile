@@ -1,7 +1,7 @@
 GO ?= go
 IMAGE ?= devbox:local
 
-.PHONY: all test build tidy fmt vet check-loc docker-build check clean
+.PHONY: all test build tidy fmt vet check-loc check-image-skills docker-build check clean
 
 all: check
 
@@ -24,7 +24,10 @@ vet:
 check-loc:
 	./scripts/check-loc.sh
 
-check: fmt tidy check-loc test vet build
+check-image-skills:
+	./scripts/check-image-skills.sh
+
+check: fmt tidy check-loc check-image-skills test vet build
 
 docker-build:
 	docker build -t $(IMAGE) .

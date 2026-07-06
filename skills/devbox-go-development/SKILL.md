@@ -39,4 +39,5 @@ go build ./cmd/devbox
 - Routes are explicit and agent-registered; do not add port autodetection.
 - Project containers are sibling containers managed through the host Docker socket.
 - DevBox v1 publishes one image. Use `ghcr.io/illusion47586/devbox:latest` for both the control plane and project containers.
+- Image skills live in `skills/` and must be copied into `/root/.codex/skills`, `/root/.agents/skills`, and `/root/.claude/skills` by the Dockerfile.
 - Zed support is host SSH plus helper links, not a separate remote-server manager.
