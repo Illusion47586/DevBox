@@ -1,0 +1,38 @@
+services:
+  devbox:
+    image: ghcr.io/dhruvwork-star/devbox:latest
+    command: ["daemon"]
+    restart: unless-stopped
+    environment:
+      DEVBOX_STATE_PATH: /var/lib/devbox/state.json
+      DEVBOX_WORKSPACE_ROOT: /workspaces
+      DEVBOX_DOMAIN: devbox
+      DEVBOX_PROJECT_IMAGE: ghcr.io/dhruvwork-star/devbox-project:latest
+      DEVBOX_CADDY_ADMIN_URL: http://caddy:2019
+      DEVBOX_HOST_SSH_NAME: thebox
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - devbox-state:/var/lib/devbox
+      - /DATA/AppData/devbox/workspaces:/workspaces
+    networks:
+      - devbox
+    depends_on:
+      - caddy
+
+  caddy:
+    image: caddy:2
+    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - devbox
+
+networks:
+  devbox:
+    name: devbox
+
+volumes:
+  devbox-state:
