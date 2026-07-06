@@ -2,7 +2,7 @@
 
 ## Runtime Model
 
-DevBox is a Go CLI packaged into a Docker image. The DevBox container mounts the host Docker socket, a persistent state volume, and a host workspace directory. It creates sibling project containers rather than running projects inside the control-plane container.
+DevBox is a Go CLI packaged into a Docker image. The DevBox container mounts the host Docker socket, a persistent state volume, and a host workspace directory. It creates sibling project containers from the same image rather than running projects inside the control-plane container.
 
 ## Components
 
@@ -11,8 +11,7 @@ DevBox is a Go CLI packaged into a Docker image. The DevBox container mounts the
 - `internal/devbox/state`: JSON persistence and state-level validation.
 - `internal/devbox/service`: project, route, session, Zed, and doctor operations.
 - `internal/devbox/proxy`: Caddy config generation.
-- `Dockerfile`: control-plane image.
-- `Dockerfile.project`: default managed project container image.
+- `Dockerfile`: single DevBox image for the control plane and project containers.
 - `skills/`: repo-local skills that guide future coding agents.
 
 ## State

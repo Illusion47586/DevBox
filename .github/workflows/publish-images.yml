@@ -17,13 +17,6 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        image:
-          - name: devbox
-            dockerfile: Dockerfile
-          - name: devbox-project
-            dockerfile: Dockerfile.project
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,7 +35,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ matrix.image.name }}
+          images: ${{ env.REGISTRY }}/${{ env.OWNER }}/devbox
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix=sha-
@@ -52,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{ matrix.image.dockerfile }}
+          file: Dockerfile
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

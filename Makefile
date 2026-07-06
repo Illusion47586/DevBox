@@ -1,8 +1,7 @@
 GO ?= go
 IMAGE ?= devbox:local
-PROJECT_IMAGE ?= devbox-project:local
 
-.PHONY: all test build tidy fmt vet check-loc docker-build docker-build-project check clean
+.PHONY: all test build tidy fmt vet check-loc docker-build check clean
 
 all: check
 
@@ -29,9 +28,6 @@ check: fmt tidy check-loc test vet build
 
 docker-build:
 	docker build -t $(IMAGE) .
-
-docker-build-project:
-	docker build -f Dockerfile.project -t $(PROJECT_IMAGE) .
 
 clean:
 	rm -rf bin dist tmp coverage.out

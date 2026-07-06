@@ -11,14 +11,21 @@ This repository contains the v1 implementation scaffold and core CLI behavior. I
 ```sh
 make check
 make docker-build
-make docker-build-project
 ```
 
 Useful environment defaults are documented in `.env.example`.
 
+DevBox publishes one image:
+
+```text
+ghcr.io/illusion47586/devbox:latest
+```
+
+The same image runs the control plane and acts as the base image for per-project containers. Project containers override the image entrypoint and stay alive with `sleep infinity`.
+
 ## Install On ZimaOS
 
-Use the published GHCR images:
+Use the published GHCR image:
 
 ```sh
 mkdir -p /DATA/AppData/devbox

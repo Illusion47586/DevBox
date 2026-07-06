@@ -57,15 +57,20 @@ func (o *Operator) EnsureProjectContainer(ctx context.Context, project model.Pro
 	if err := run(ctx, "", "docker", "inspect", project.ContainerName); err == nil {
 		return run(ctx, "", "docker", "start", project.ContainerName)
 	}
-	return run(ctx, "", "docker", "run", "-d",
+	return run(ctx, "", "docker", projectContainerRunArgs(project)...)
+}
+
+func projectContainerRunArgs(project model.Project) []string {
+	return []string{"run", "-d",
 		"--name", project.ContainerName,
 		"--hostname", project.Name,
 		"--network", "devbox",
 		"--network-alias", project.Name,
-		"-v", project.WorkspacePath+":/workspace",
+		"-v", project.WorkspacePath + ":/workspace",
 		"-v", "/var/run/docker.sock:/var/run/docker.sock",
 		"-w", "/workspace",
+		"--entrypoint", "sleep",
 		project.Image,
-		"sleep", "infinity",
-	)
+		"infinity",
+	}
 }

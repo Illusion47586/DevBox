@@ -38,4 +38,5 @@ go build ./cmd/devbox
 - JSON state is acceptable for v1; do not introduce a database unless a feature needs transactions.
 - Routes are explicit and agent-registered; do not add port autodetection.
 - Project containers are sibling containers managed through the host Docker socket.
+- DevBox v1 publishes one image. Use `ghcr.io/illusion47586/devbox:latest` for both the control plane and project containers.
 - Zed support is host SSH plus helper links, not a separate remote-server manager.

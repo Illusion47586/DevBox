@@ -13,6 +13,7 @@ DevBox runs as a Docker control-plane container with:
 - A persistent state volume mounted at `/var/lib/devbox`.
 - A host workspace directory mounted at `/workspaces`.
 - Caddy available for private HTTP routing.
+- One image, `ghcr.io/illusion47586/devbox:latest`, used for both the control plane and project containers.
 
 ## Common Commands
 
