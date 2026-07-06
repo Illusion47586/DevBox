@@ -14,7 +14,7 @@ DevBox is a Go CLI packaged into a Docker image. The DevBox container mounts the
 - `Dockerfile`: single DevBox image for the control plane and project containers.
 - `skills/`: repo-local skills that guide future coding agents.
 
-The image installs `skills/` into `/root/.codex/skills`, `/root/.agents/skills`, and `/root/.claude/skills` so bundled agents can discover DevBox-specific operating guidance from inside project containers.
+The image installs selected `skills.sh` registry skills with the `skills` CLI, then installs local `skills/` into `/root/.codex/skills`, `/root/.agents/skills`, and `/root/.claude/skills` so bundled agents can discover DevBox-specific operating guidance from inside project containers.
 
 ## State
 

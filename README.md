@@ -23,13 +23,18 @@ ghcr.io/illusion47586/devbox:latest
 
 The same image runs the control plane and acts as the base image for per-project containers. Project containers override the image entrypoint and stay alive with `sleep infinity`.
 
-The image also installs DevBox skills globally for Codex-style, Claude Code-style, and generic agent skill directories:
+The image also installs DevBox skills and selected registry skills from `skills.sh` globally for Codex-style, Claude Code-style, and generic agent skill directories:
 
 ```text
 /root/.codex/skills
 /root/.agents/skills
 /root/.claude/skills
 ```
+
+Registry skills installed by default:
+
+- `vercel-labs/agent-skills`: `vercel-react-best-practices`, `web-design-guidelines`, `writing-guidelines`
+- `obra/superpowers`: `test-driven-development`, `systematic-debugging`, `requesting-code-review`, `receiving-code-review`, `verification-before-completion`, `writing-plans`
 
 ## Install On ZimaOS
 

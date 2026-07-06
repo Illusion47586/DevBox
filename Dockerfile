@@ -14,10 +14,24 @@ RUN curl https://mise.run | sh \
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
   && apt-get update \
   && apt-get install -y --no-install-recommends nodejs \
-  && npm install -g @openai/codex @anthropic-ai/claude-code opencode-ai \
+  && npm install -g @openai/codex @anthropic-ai/claude-code opencode-ai skills@1.5.14 \
   && rm -rf /var/lib/apt/lists/*
+RUN skills add vercel-labs/agent-skills \
+    --skill vercel-react-best-practices \
+    --skill web-design-guidelines \
+    --skill writing-guidelines \
+    -g --agent codex claude-code opencode -y --copy \
+  && skills add obra/superpowers \
+    --skill test-driven-development \
+    --skill systematic-debugging \
+    --skill requesting-code-review \
+    --skill receiving-code-review \
+    --skill verification-before-completion \
+    --skill writing-plans \
+    -g --agent codex claude-code opencode -y --copy
 COPY skills /opt/devbox/skills
 RUN mkdir -p /root/.codex/skills /root/.agents/skills /root/.claude/skills \
+  && cp -R /root/.agents/skills/. /root/.codex/skills/ \
   && cp -R /opt/devbox/skills/. /root/.codex/skills/ \
   && cp -R /opt/devbox/skills/. /root/.agents/skills/ \
   && cp -R /opt/devbox/skills/. /root/.claude/skills/
