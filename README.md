@@ -23,8 +23,8 @@ Use the published GHCR images:
 ```sh
 mkdir -p /DATA/AppData/devbox
 cd /DATA/AppData/devbox
-curl -fsSLO https://raw.githubusercontent.com/dhruvwork-star/DevBox/main/deploy/zimaos-compose.yaml
-curl -fsSLO https://raw.githubusercontent.com/dhruvwork-star/DevBox/main/deploy/Caddyfile
+curl -fsSLO https://raw.githubusercontent.com/Illusion47586/DevBox/main/deploy/zimaos-compose.yaml
+curl -fsSLO https://raw.githubusercontent.com/Illusion47586/DevBox/main/deploy/Caddyfile
 docker compose -f zimaos-compose.yaml up -d
 docker compose -f zimaos-compose.yaml exec devbox devbox doctor --json
 ```

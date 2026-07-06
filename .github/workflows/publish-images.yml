@@ -12,7 +12,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  OWNER: dhruvwork-star
+  OWNER: illusion47586
 
 jobs:
   publish:
