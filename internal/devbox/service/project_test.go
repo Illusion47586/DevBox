@@ -15,7 +15,7 @@ func TestProjectContainerRunArgsOverrideEntrypoint(t *testing.T) {
 		Image:         "ghcr.io/illusion47586/devbox:latest",
 	}
 
-	args := projectContainerRunArgs(project)
+	args := projectContainerRunArgs(project, project.WorkspacePath)
 	want := []string{
 		"run", "-d",
 		"--name", "devbox-project-myapp",
@@ -31,5 +31,21 @@ func TestProjectContainerRunArgsOverrideEntrypoint(t *testing.T) {
 	}
 	if !reflect.DeepEqual(args, want) {
 		t.Fatalf("run args = %#v, want %#v", args, want)
+	}
+}
+
+func TestProjectContainerMountSourceUsesHostWorkspaceRoot(t *testing.T) {
+	operator := NewOperator(RuntimeConfig{
+		WorkspaceRoot:     "/workspaces",
+		HostWorkspaceRoot: "/DATA/AppData/devbox/workspaces",
+	})
+	project := model.Project{
+		Name:          "test",
+		WorkspacePath: "/workspaces/test",
+	}
+
+	source := operator.projectMountSource(project)
+	if source != "/DATA/AppData/devbox/workspaces/test" {
+		t.Fatalf("mount source = %q, want host workspace path", source)
 	}
 }

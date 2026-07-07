@@ -13,6 +13,7 @@ description: Use when a coding agent needs to control DevBox projects, tmux sess
 - Keep long-running work inside project tmux sessions.
 - Use `devbox shell <project>` for interactive project access.
 - Use `devbox zed <project> --json` when a human needs a Zed SSH link.
+- If project container creation reports a read-only `/workspaces` mount source, check that `DEVBOX_HOST_WORKSPACE_ROOT` points to the matching host path.
 
 ## Common Flow
 

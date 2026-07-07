@@ -56,6 +56,15 @@ docker compose -f compose.yaml exec devbox devbox project register /workspaces/m
 docker compose -f compose.yaml exec devbox devbox route add --project myapp --service web --target 3000 --json
 ```
 
+When installing manually, set both workspace variables:
+
+```text
+DEVBOX_WORKSPACE_ROOT=/workspaces
+DEVBOX_HOST_WORKSPACE_ROOT=/DATA/AppData/devbox/workspaces
+```
+
+`DEVBOX_WORKSPACE_ROOT` is the path inside the DevBox container. `DEVBOX_HOST_WORKSPACE_ROOT` is the matching path as seen by TheBox's Docker daemon for sibling project-container mounts.
+
 ## Core Commands
 
 ```sh

@@ -15,6 +15,15 @@ DevBox runs as a Docker control-plane container with:
 - Caddy available for private HTTP routing.
 - One image, `ghcr.io/illusion47586/devbox:latest`, used for both the control plane and project containers.
 
+Set both workspace environment variables:
+
+```text
+DEVBOX_WORKSPACE_ROOT=/workspaces
+DEVBOX_HOST_WORKSPACE_ROOT=/DATA/AppData/devbox/workspaces
+```
+
+The host workspace root is required because project containers are sibling containers created by the host Docker daemon.
+
 ## Common Commands
 
 ```sh

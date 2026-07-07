@@ -20,6 +20,8 @@ The image installs selected `skills.sh` registry skills with the `skills` CLI, t
 
 State is stored as JSON in `DEVBOX_STATE_PATH`. The v1 state tracks projects, routes, and tmux sessions. This keeps the system inspectable and easy to back up on a home server.
 
+Project workspace paths are stored as DevBox-container paths such as `/workspaces/myapp`. When creating sibling project containers through the host Docker socket, DevBox maps those to host paths using `DEVBOX_HOST_WORKSPACE_ROOT`, for example `/DATA/AppData/devbox/workspaces/myapp`.
+
 ## Networking
 
 Caddy handles dynamic HTTP reverse proxying. Agents explicitly register routes through the CLI. DevBox generates hosts in the form `service.project.devbox`; existing LAN DNS is responsible for resolving `*.devbox` to TheBox.
